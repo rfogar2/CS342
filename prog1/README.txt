@@ -1,7 +1,7 @@
-To compile and run, simply type 
+To compile and run on unix machines enter 
 
 	make
 
-To run again once compiled, type
+To run again once compiled, enter
 
 	java MidMeeting
