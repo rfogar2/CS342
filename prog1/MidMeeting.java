@@ -14,9 +14,6 @@ public class MidMeeting {
         ArrayList<City> cities = readCityNames(cityNames);
         addConnections(cities, cityDistances);
 
-        // passes in a copy since sorting by name
-        distancesFromChicago(new ArrayList<City>(cities));
-
         findClosestAverageCity(cities, participants);
     }
 
@@ -46,22 +43,6 @@ public class MidMeeting {
 
             cityA.addConnection(cityB, distance);
             cityB.addConnection(cityA, distance);
-        }
-    }
-
-    public static void distancesFromChicago (ArrayList<City> cities) {
-        City chicago = cities.get(57);
-        dijkstra(cities, chicago);
-
-        Collections.sort(cities, new Comparator<City>() {
-           public int compare(City c1, City c2) {
-               return c1.getName().compareTo(c2.getName());
-           }
-        });
-
-        for (City dest : cities) {
-            System.out.println("Shortest path from " + chicago.getName() +
-                    " to " + dest.getName() + " is " + dest.getDistance() + " units.");
         }
     }
 

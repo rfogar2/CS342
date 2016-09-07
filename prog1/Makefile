@@ -9,3 +9,6 @@ Connection: Connection.java
 
 MidMeeting: City Connection MidMeeting.java
 	javac MidMeeting.java
+
+clean:
+	rm *.class 
