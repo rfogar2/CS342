@@ -1,8 +1,30 @@
+/*
+ * -------------------------------------------------
+ * MidMeeting program to find shortest average distance
+ * for given participants in a given graph
+ *
+ * Class: CS 342, Fall 2016
+ * System: OS X, Atom, Terminal
+ * Author Code Number: 1675F
+ * TA: Nianzu Ma
+ * -------------------------------------------------
+ */
+
 import java.io.*;
 import java.util.*;
 
 public class MidMeeting {
+    /*
+     * Main function for running program
+     * Receives: Nothing
+     * Returns: Nothing
+    */
     public static void main (String[] args) throws FileNotFoundException {
+        System.out.println("Author Code Number: 1675F\n" +
+                           "Class: CS 342, Fall 2016\n" +
+                           "Program: #1, MidMeeting\n" +
+                           "TA: Nianzu Ma");
+
         File cn = new File("CityNames.txt");
         File cd = new File("CityDistances.txt");
         File p = new File("participants.txt");
@@ -17,6 +39,11 @@ public class MidMeeting {
         findClosestAverageCity(cities, participants);
     }
 
+    /*
+     * Reads city names from CityNames.txt
+     * Receives: Java.util.Scanner of city names file
+     * Returns: returns an ArrayList of City objects
+    */
     public static ArrayList<City> readCityNames (Scanner cityNames) {
         cityNames.nextLine(); // clear rest of line
         ArrayList<City> cities = new ArrayList<City>();
@@ -29,6 +56,11 @@ public class MidMeeting {
         return cities;
     }
 
+    /*
+     * Adds connections by reading CityDistances.txt file
+     * Receives: ArrayList of City objects created in readCityNames, cityDistances Scanner
+     * Returns: Nothing, mutates existing cities
+    */
     public static void addConnections (ArrayList<City> cities, Scanner cityDistances) {
         int numberOfDistances = cityDistances.nextInt();
 
@@ -46,6 +78,12 @@ public class MidMeeting {
         }
     }
 
+    /*
+     * Sets up modified Dijkstra algorithm for finding distance from source
+     *  to all other nodes
+     * Receives: Cities read in from text files, source city to start at
+     * Returns: Nothing
+    */
     public static void dijkstra (ArrayList<City> cities, City source) {
         PriorityQueue<City> unvisited = new PriorityQueue<City>(cities.size(), new Comparator<City>() {
             public int compare(City c1, City c2) {
@@ -66,6 +104,11 @@ public class MidMeeting {
         dijkstraTravel(unvisited, source);
     }
 
+    /*
+     * Does the work for modified Dijkstra algorithm
+     * Receives: Unvisited cities and source
+     * Returns: Nothing, mutates distance in City objects
+    */
     public static void dijkstraTravel (PriorityQueue<City> unvisited, City source) {
         while (unvisited.size() != 0) {
             source.setVisited(true);
@@ -85,6 +128,11 @@ public class MidMeeting {
         }
     }
 
+    /*
+     * Finds closest average city for given participants
+     * Receives: Cities and participants
+     * Returns: Nothing, prints out results
+    */
     public static void findClosestAverageCity (ArrayList<City> cities, Scanner participants) {
         ArrayList<City> participantCities = new ArrayList<City>();
 
